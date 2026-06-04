@@ -1,9 +1,21 @@
 import type { CSSProperties } from "react";
+import Chatbot from "./Chatbot";
 
 const phoneDisplay = "(832) 888-4109";
 const phoneHref = "tel:8328884109";
 
 const nav = ["Driveway Replacement", "Patios", "Repair", "Sidewalks", "Parking Lot Repair", "Reviews", "Contact"];
+
+const heroImage = "https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=1400&q=85";
+
+const serviceImages = [
+  "https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=900&q=80",
+  "https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=900&q=80",
+  "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=900&q=80",
+  "https://images.unsplash.com/photo-1518005020951-eccb494ad742?auto=format&fit=crop&w=900&q=80",
+  "https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&w=900&q=80",
+  "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=900&q=80",
+];
 
 const services = [
   {
@@ -42,14 +54,38 @@ const trust = [
 ];
 
 const gallery = [
-  "Nice radius turns on walkway",
-  "Newly poured residential driveway, beautifully finished and taped off for curing",
-  "AB Concrete crew on site",
-  "6 to 8 inches of concrete replaced on a parking lot repair",
-  "Pumping a driveway",
-  "Full driveway replacement",
-  "Fresh driveway approach in Houston",
-  "Concrete patio with a curved pathway leading to the swimming pool and landscaping",
+  {
+    title: "Nice radius turns on walkway",
+    image: "https://images.unsplash.com/photo-1604014237800-1c9102c219da?auto=format&fit=crop&w=800&q=80",
+  },
+  {
+    title: "Newly poured residential driveway, beautifully finished and taped off for curing",
+    image: "https://images.unsplash.com/photo-1597047084897-51e81819a499?auto=format&fit=crop&w=800&q=80",
+  },
+  {
+    title: "AB Concrete crew on site",
+    image: "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?auto=format&fit=crop&w=800&q=80",
+  },
+  {
+    title: "6 to 8 inches of concrete replaced on a parking lot repair",
+    image: "https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&w=800&q=80",
+  },
+  {
+    title: "Pumping a driveway",
+    image: "https://images.unsplash.com/photo-1581094271901-8022df4466f9?auto=format&fit=crop&w=800&q=80",
+  },
+  {
+    title: "Full driveway replacement",
+    image: "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=800&q=80",
+  },
+  {
+    title: "Fresh driveway approach in Houston",
+    image: "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=800&q=80",
+  },
+  {
+    title: "Concrete patio with a curved pathway leading to the swimming pool and landscaping",
+    image: "https://images.unsplash.com/photo-1600607688969-a5bfcd646154?auto=format&fit=crop&w=800&q=80",
+  },
 ];
 
 
@@ -115,6 +151,9 @@ export default function Home() {
           </div>
         </div>
         <div className="hero-card reveal delay-1" aria-label="AB Concrete project summary">
+          <figure className="hero-photo">
+            <img src={heroImage} alt="Premium concrete crew finishing a modern exterior project" />
+          </figure>
           <div className="logo-orb" aria-label="AB Concrete luxury brand mark">
             <span className="orb-stars">★★★★★</span>
             <strong>AB</strong>
@@ -146,6 +185,7 @@ export default function Home() {
         <div className="service-grid">
           {services.map((service, index) => (
             <article className="service-card reveal" style={{ "--i": index } as CSSProperties} key={service.title} id={index === 1 ? "repair" : index === 2 ? "patios" : index === 3 ? "sidewalks" : index === 4 ? "parking-lot-repair" : undefined}>
+              <img src={serviceImages[index]} alt={`${service.title} by AB Concrete`} />
               <span>{String(index + 1).padStart(2, "0")}</span>
               <h3>{service.title}</h3>
               <p>{service.text}</p>
@@ -168,15 +208,16 @@ export default function Home() {
         </div>
         <div className="gallery-grid reveal delay-1">
           {gallery.map((item, index) => (
-            <div className="work-tile" key={item}>
+            <div className="work-tile" key={item.title}>
+              <img src={item.image} alt={item.title} />
               <span>{index + 1}</span>
-              <p>{item}</p>
+              <p>{item.title}</p>
             </div>
           ))}
         </div>
       </section>
 
-      <section id="reviews" className="section proof">
+      <section id="reviews" className="section proof image-split">
         <div className="proof-panel reveal">
           <p className="eyebrow">Reviews & reputation</p>
           <h2>Value our customers. Prove it publicly.</h2>
@@ -189,11 +230,12 @@ export default function Home() {
           </div>
         </div>
         <div className="trust-list reveal delay-1">
+          <img className="proof-image" src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=900&q=80" alt="Beautiful finished home exterior and driveway" />
           {trust.map((item) => <div key={item}>✓ {item}</div>)}
         </div>
       </section>
 
-      <section className="section mission">
+      <section className="section mission mission-visual">
         <div className="reveal">
           <p className="eyebrow">Our mission</p>
           <blockquote>
@@ -201,6 +243,7 @@ export default function Home() {
           </blockquote>
         </div>
         <div className="mission-card reveal delay-1">
+          <img src="https://images.unsplash.com/photo-1541976590-713941681591?auto=format&fit=crop&w=900&q=80" alt="Construction professionals reviewing a quality project" />
           <h3>Why Houston chooses AB Concrete</h3>
           <p>Local presence, visible reviews, practical concrete education and a direct owner-style call-to-action create the trust needed before a homeowner books a quote.</p>
         </div>
@@ -230,9 +273,11 @@ export default function Home() {
         <a className="button primary" href={phoneHref}>Call {phoneDisplay}</a>
       </section>
 
+      <Chatbot />
+
       <footer>
         <div><strong>AB Concrete in Houston, TX</strong><span>Spring, United States • Geo presence: 30.1185635, -95.3730176</span></div>
-        <div><span>Driveway Cost Guide</span><span>Privacy Policy</span><span>Copyright © 2026, AB Concrete. All Rights Reserved.</span></div>
+        <div><span>Driveway Cost Guide</span><span>Privacy Policy</span><span>Copyright © 2026, AB Concrete. All Rights Reserved.</span><span>demo built by buildveloper@gmail.com</span></div>
       </footer>
     </main>
   );
